@@ -6,3 +6,7 @@ import RoboPiLib as RPL
 import time
 
 co = 1
+
+while True:
+    print RPL.analogRead(co)
+    
