@@ -1,12 +1,13 @@
 # CO2 sensor
-# its lit
 
 import setup
 import RoboPiLib as RPL
 import time
 
 co = 1
+original = co
 
 while True:
-    print RPL.analogRead(co)
-    
+    content = RPL.analogRead(co)
+    if content - original > 5:
+        print "BEEP BEEP BEEP"
