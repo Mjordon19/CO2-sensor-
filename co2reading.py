@@ -9,15 +9,15 @@ print RPL.analogRead(co)
 average = [ ]
 base = 0
 
-while len(average) <= 100:
+while len(average) < 200:
     content = RPL.analogRead(co)
     average.append(content)
-    if len(average) == 100:
+    if len(average) == 200:
         base = sum(average) / len(average)
         print base
 
 
 while True:
     content = RPL.analogRead(co)
-    if content - base > 3:
+    if content - base > 4:
         print "BEEP BEEP BEEP"
