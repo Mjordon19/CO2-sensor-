@@ -9,5 +9,5 @@ original = RPL.analogRead(co)
 
 while True:
     content = RPL.analogRead(co)
-    if content - original > 5:
+    if content - original > 1:
         print "BEEP BEEP BEEP"
