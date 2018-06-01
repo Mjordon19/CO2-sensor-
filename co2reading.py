@@ -6,8 +6,10 @@ import time
 
 co = 1
 original = RPL.analogRead(co)
+print original
 
 while True:
     content = RPL.analogRead(co)
-    if content - original > 1:
+    print content
+    if content - original > 3:
         print "BEEP BEEP BEEP"
