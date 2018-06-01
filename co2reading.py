@@ -6,6 +6,8 @@ import time
 
 co = 1
 print RPL.analogRead(co)
+average = [ ]
+base = 0
 
 while len(average) <= 100:
     content = RPL.analogRead(co)
