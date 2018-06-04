@@ -19,7 +19,7 @@ while len(average) < 200:
 
 while True:
     content = RPL.analogRead(co)
-    if content - base > 3:
+    if content - base > 2:
         print "BEEP BEEP BEEP"
     else:
         print "nope"
