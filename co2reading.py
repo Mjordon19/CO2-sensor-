@@ -21,3 +21,5 @@ while True:
     content = RPL.analogRead(co)
     if content - base >= 2:
         print "BEEP BEEP BEEP"
+    else:
+        print " "
