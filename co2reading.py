@@ -9,10 +9,10 @@ print RPL.analogRead(co)
 average = [ ]
 base = 0
 
-while len(average) < 200:
+while len(average) < 1000:
     content = RPL.analogRead(co)
     average.append(content)
-    if len(average) == 200:
+    if len(average) == 1000w:
         base = sum(average) / len(average)
         print base
 
