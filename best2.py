@@ -16,10 +16,10 @@ future = now
 motorL = 0
 motorR = 2
 
-right = 17
+right = 19
 front = 16
-left = 19
-analogR = 1
+left = 17
+analogL = 1
 
 rgo = 2000
 rslow = 1500
@@ -33,25 +33,25 @@ RPL.servoWrite(motorL, lgo)
 RPL.servoWrite(motorL, lgo)
 
 while True:
-    print RPL.analogRead(analogR)
+    print RPL.analogRead(analogL)
     RPL.servoWrite(motorR, rgo)
     RPL.servoWrite(motorL, lgo)
 
-    while RPL.analogRead(analogR) >= 400: # middle range, can go straight
+    while RPL.analogRead(analogL) >= 400: # middle range, can go straight
         print "we good"
         RPL.servoWrite(motorR, rgo)
         RPL.servoWrite(motorL, lgo)
 
-    while RPL.analogRead(analogR) < 400: # no longer middle
+    while RPL.analogRead(analogL) < 400: # no longer middle
         print "not good"
-        if RPL.digitalRead(right) == 0: # digital also sense, so close
+        if RPL.digitalRead(left) == 0: # digital also sense, so close
             print "close"
-            print RPL.analogRead(analogR)
-            RPL.servoWrite(motorR, rslow)
-            RPL.servoWrite(motorL, lgo)
-
-        if RPL.digitalRead(right) == 1: # digital doesn't sense, far
-            print "far"
-            print RPL.analogRead(analogR)
+            print RPL.analogRead(analogL)
             RPL.servoWrite(motorR, rgo)
             RPL.servoWrite(motorL, lslow)
+
+        if RPL.digitalRead(left) == 1: # digital doesn't sense, far
+            print "far"
+            print RPL.analogRead(analogL)
+            RPL.servoWrite(motorR, rslow)
+            RPL.servoWrite(motorL, lgo)
