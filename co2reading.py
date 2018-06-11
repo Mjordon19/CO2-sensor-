@@ -5,10 +5,12 @@ import RoboPiLib as RPL
 import post_to_web as PTW
 import time
 
+
 co = 1
 print RPL.analogRead(co)
 average = [ ]
 base = 0
+detect = 0
 
 # ^ setup
 
@@ -23,8 +25,12 @@ while len(average) < 1000:
 
 while True:
     content = RPL.analogRead(co)
-    PTW.post()
     if content - base >= 2: # a difference >= 2 signifies a significant change
         print "BEEP BEEP BEEP" # this indicates breathing
+        detect = 0
+        PTW.state[detect] = 0
     else:
         print " "
+        detect = 1
+        PTW.state[detect] = 1
+    PTW.post()
