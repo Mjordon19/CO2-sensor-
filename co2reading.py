@@ -2,7 +2,7 @@
 
 import setup
 import RoboPiLib as RPL
-import post_to_web
+import post_to_web as PTW
 import time
 
 co = 1
