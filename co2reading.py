@@ -11,6 +11,7 @@ print RPL.analogRead(co)
 average = [ ]
 base = 0
 detect = 0
+x = 0
 
 # ^ setup
 
@@ -26,11 +27,15 @@ while len(average) < 1000:
 while True:
     content = RPL.analogRead(co)
     if content - base >= 2: # a difference >= 2 signifies a significant change
-        print "BEEP BEEP BEEP" # this indicates breathing
-        detect = 0
-        PTW.state[detect] = 0
+        x = x + 1
+        if x >= 3:
+            print "BEEP BEEP BEEP" # this indicates breathing
+            detect = 0
+            PTW.state['detect'] = 0
     else:
         print " "
         detect = 1
-        PTW.state[detect] = 1
+        PTW.state['detect'] = 1
+        x = 0
+
     PTW.post()
