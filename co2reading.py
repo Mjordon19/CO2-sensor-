@@ -30,19 +30,13 @@ setB()
 while True:
     content = RPL.analogRead(co)
     print content
-    if content - base >= 2: # a difference >= 2 signifies a significant change
+    if content - base >= 2 or content - base <= -2: # a difference >= 2 signifies a significant change
         x = x + 1
         detect = 2
         PTW.state['detect'] = 2
         if x >= 3: # this indicates breathing
             detect = 3
             PTW.state['detect'] = 3
-
-    elif content - base <= -3:
-        average = [ ]
-        setB()
-        print "base:"
-        print base
     else:
         detect = 1
         PTW.state['detect'] = 1
