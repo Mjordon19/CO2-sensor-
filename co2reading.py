@@ -28,7 +28,7 @@ while len(average) < 1000:
 
 while True:
     content = RPL.analogRead(co)
-    if content - base >= 2 or content - base <= -3: # a difference >= 2 signifies a significant change
+    if content - base >= 2: # a difference >= 2 signifies a significant change
         print content
         x = x + 1
         detect = 2
@@ -37,6 +37,14 @@ while True:
             print "!!!!"
             detect = 3
             PTW.state['detect'] = 3
+    elif content - base <= -2:
+        average = [ ]
+        while len(average) < 1000:
+            content = RPL.analogRead(co)
+            average.append(content)
+            if len(average) == 1000:
+                base = sum(average) / len(average)
+                print base
     else:
         detect = 1
         PTW.state['detect'] = 1
