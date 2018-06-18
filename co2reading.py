@@ -44,6 +44,7 @@ while True:
             average.append(content)
             if len(average) == 1000:
                 base = sum(average) / len(average)
+                print "NEW BASE"
                 print base
     else:
         detect = 1
