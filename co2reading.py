@@ -17,7 +17,7 @@ x = 0
 # ^ setup
 
 # begins by averaging the first 1000 readings in order to get a base reading
-def base():
+def setB():
     while len(average) < 1000:
         content = RPL.analogRead(co)
         average.append(content)
@@ -25,7 +25,7 @@ def base():
             base = sum(average) / len(average)
             print base
 
-base()
+setB()
 
 while True:
     content = RPL.analogRead(co)
@@ -39,7 +39,7 @@ while True:
             PTW.state['detect'] = 3
 
     elif content - base <= -3:
-        base()
+        setB()
     else:
         detect = 1
         PTW.state['detect'] = 1
