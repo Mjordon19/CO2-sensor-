@@ -40,6 +40,7 @@ while True:
 
     elif content - base <= -3:
         setB()
+        print base
     else:
         detect = 1
         PTW.state['detect'] = 1
