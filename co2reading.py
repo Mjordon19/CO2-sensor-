@@ -39,9 +39,10 @@ while True:
             PTW.state['detect'] = 3
 
     elif content - base <= -3:
+        average = [ ]
         setB()
         print "base:"
-        print base 
+        print base
     else:
         detect = 1
         PTW.state['detect'] = 1
