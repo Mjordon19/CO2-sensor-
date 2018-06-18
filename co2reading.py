@@ -1,7 +1,7 @@
 # CO2 sensor
 
-import setup
 import RoboPiLib as RPL
+RPL.RoboPiInit("/dev/ttyAMA0",115200)
 import post_to_web as PTW
 import time
 
@@ -11,29 +11,29 @@ print RPL.analogRead(co)
 average = [ ]
 base = 0
 detect = 0
+content = 0
 x = 0
 
 # ^ setup
 
 # begins by averaging the first 1000 readings in order to get a base reading
-while len(average) < 1000:
+while len(average) < 500:
     content = RPL.analogRead(co)
     average.append(content)
-    if len(average) == 1000:
+    if len(average) == 500:
         base = sum(average) / len(average)
         print base
-
 
 while True:
     content = RPL.analogRead(co)
     if content - base >= 2: # a difference >= 2 signifies a significant change
         x = x + 1
-        if x >= 3:
-            print "BEEP BEEP BEEP" # this indicates breathing
-            detect = 0
-            PTW.state['detect'] = 0
+        detect = 2
+        PTW.state['detect'] = 2
+        if x >= 3: # this indicates breathing
+            detect = 3
+            PTW.state['detect'] = 3
     else:
-        print " "
         detect = 1
         PTW.state['detect'] = 1
         x = 0
