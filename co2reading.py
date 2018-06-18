@@ -13,6 +13,7 @@ base = 0
 detect = 0
 content = 0
 x = 0
+PTW.state['detect'] = 1
 
 # ^ setup
 
