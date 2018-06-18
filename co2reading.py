@@ -17,12 +17,15 @@ x = 0
 # ^ setup
 
 # begins by averaging the first 1000 readings in order to get a base reading
-while len(average) < 1000:
-    content = RPL.analogRead(co)
-    average.append(content)
-    if len(average) == 1000:
-        base = sum(average) / len(average)
-        print base
+def base():
+    while len(average) < 1000:
+        content = RPL.analogRead(co)
+        average.append(content)
+        if len(average) == 1000:
+            base = sum(average) / len(average)
+            print base
+
+base()
 
 while True:
     content = RPL.analogRead(co)
@@ -34,6 +37,9 @@ while True:
         if x >= 3: # this indicates breathing
             detect = 3
             PTW.state['detect'] = 3
+
+    elif content - base <= -3:
+        base()
     else:
         detect = 1
         PTW.state['detect'] = 1
