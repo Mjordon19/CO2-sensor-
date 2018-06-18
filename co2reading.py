@@ -28,7 +28,7 @@ while len(average) < 1000:
 
 while True:
     content = RPL.analogRead(co)
-    if content - base >= 2 or content - base <= -2: # a difference >= 2 signifies a significant change
+    if content - base >= 2 or content - base <= -3: # a difference >= 2 signifies a significant change
         print content
         x = x + 1
         detect = 2
