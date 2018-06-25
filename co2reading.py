@@ -1,5 +1,13 @@
 # CO2 sensor
 
+# comands:
+# ssh student@192.168.23.207
+# password: Engineering!1
+# python co2reading.py
+
+# go to GUI: nav > config ip adress > data should be ssh number
+
+
 import RoboPiLib as RPL
 RPL.RoboPiInit("/dev/ttyAMA0",115200)
 import post_to_web as PTW
@@ -10,10 +18,9 @@ co = 1
 print RPL.analogRead(co)
 average = [ ]
 base = 0
-detect = 0
+CO2detect = 0
 content = 0
-x = 0
-PTW.state['detect'] = 1
+PTW.state['CO2detect'] = 1
 
 # ^ setup
 
@@ -22,17 +29,16 @@ base = RPL.analogRead(co)
 
 while True:
     content = RPL.analogRead(co)
-    if content <= 190 or base - content >= 50:
-        x = x + 1
-        detect = 2
-        PTW.state['detect'] = 2
-        if x >= 3: # this indicates breathing
-            detect = 3
-            PTW.state['detect'] = 3
+    if content <= 250 or base - content >= 30:
+        CO2detect = 2
+        PTW.state['CO2detect'] = 2
+    elif content <= 190 or base - content >= 50:
+        CO2detect = 3
+        PTW.state['CO2detect'] = 3
 
     else:
-        detect = 1
-        PTW.state['detect'] = 1
+        CO2detect = 1
+        PTW.state['CO2detect'] = 1
         x = 0
 
     PTW.post()
